@@ -7,7 +7,6 @@ T = 10; %s total time interval
 tavs = [1 0.1 0.01];
 lambdas = [0.1 0.01 0.001];
 
-
 %% Task 5.a
 figure(100);
 for Idx = 1:length(tavs)
@@ -20,6 +19,7 @@ for Idx = 1:length(tavs)
     line([spikeTrain;spikeTrain],[0;.5]*ones(size(spikeTrain)),'Color','k');
     legend(sprintf('\\tau = %2.2f sec',tavs(Idx)))
     xlim([0,T]);ylim([0,1]);
+    xlabel('time [s]');
 end 
 suptitle('Task 5.a')
 
@@ -37,10 +37,17 @@ for Idx = 1:length(tavs)
 end 
 figure(101);
 for Idx = 1:length(tavs)
-    subplot(310+Idx);
+    subplot(130+Idx);hold on;
     hist(spikeCounts(:,1,Idx));
-    legend(sprintf('\\tau = %2.2f sec',tavs(Idx)))
-
+    
+    meanSpikeTrain = mean(spikeCounts(:,1,Idx));
+    varSpikeTrain = sqrt(var(spikeCounts(:,1,Idx)));
+    plot([meanSpikeTrain meanSpikeTrain],[0 max(ylim)],'r');
+    plot([meanSpikeTrain+varSpikeTrain meanSpikeTrain+varSpikeTrain],[0 max(ylim)],'b');
+    plot([meanSpikeTrain-varSpikeTrain meanSpikeTrain-varSpikeTrain],[0 max(ylim)],'b');  
+    
+    legend(sprintf('\\tau = %2.2f sec',tavs(Idx)),'mean','variance');
+    xlabel('spike count');ylabel('tirals');
 end
 suptitle('Task 5.b')
 
@@ -50,16 +57,14 @@ numSamples = 10000;
 figure(102);
 for Idx = 1:length(lambdas)
     lambda=lambdas(Idx);
-    
     spikeTrain = binornd(1,lambda,1,numSamples);
-
     spikeTrain = spikeTrain.*linspace(0,T,numSamples);
     spikeTrain = spikeTrain(spikeTrain>0);
     subplot(310+Idx);
     line([spikeTrain;spikeTrain],[0;.5]*ones(size(spikeTrain)),'Color','k');
     legend(sprintf('\\lambda = %2.3f sec',lambdas(Idx)))
     xlim([0,T]);ylim([0,1]);
-
+    xlabel('time [s]');
 end
 suptitle('Task 5.c')
 
@@ -77,9 +82,17 @@ for Idx = 1:length(lambdas)
 end 
 figure(103);
 for Idx = 1:length(tavs)
-    subplot(310+Idx);
+    subplot(130+Idx);hold on;
     hist(spikeCounts(:,1,Idx));
-    legend(sprintf('\\lambda = %2.3f sec',lambdas(Idx)))
+    meanSpikeTrain = mean(spikeCounts(:,1,Idx));
+    varSpikeTrain = sqrt(var(spikeCounts(:,1,Idx)));
+    plot([meanSpikeTrain meanSpikeTrain],[0 max(ylim)],'r');
+    plot([meanSpikeTrain+varSpikeTrain meanSpikeTrain+varSpikeTrain],[0 max(ylim)],'b');
+    plot([meanSpikeTrain-varSpikeTrain meanSpikeTrain-varSpikeTrain],[0 max(ylim)],'b');
+    
+    legend(sprintf('\\lambda = %2.3f sec',lambdas(Idx)),'mean','variance')
+    xlabel('spike count');ylabel('tirals');
+
 end
 
 suptitle('Task 5.d')
