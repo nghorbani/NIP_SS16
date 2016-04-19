@@ -1,4 +1,5 @@
 % Nima Ghorbani
+% https://github.com/nimagh/NIP_SS16
 % Neural Coding - Excercise 1
 % goal: Spike trains as random processes
 clear all; clc; close all;
