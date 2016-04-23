@@ -7,6 +7,7 @@ clear all; clc; close all;
 %%
 % task 4 coefficient of variance of gamma ditribution
 % Cv = sqrt(vr)/mean
+figure(101);
 lambdas = 0.1:0.1:100;
 Cvs = zeros(1,length(lambdas));
 for i=1:length(lambdas)
@@ -20,6 +21,7 @@ title('task 2. coefficient of variance of gamma ditribution');
 xlabel('lambda = a = b');ylabel('Cv');
 
 %%
+figure(102);
 % task 5 fano factor of negative binomial 
 lambdas = 0.01:0.01:1;
 Fs = zeros(1,length(lambdas));
