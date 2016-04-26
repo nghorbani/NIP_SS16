@@ -27,10 +27,8 @@ lambdas = 0.01:0.01:1;
 Fs = zeros(1,length(lambdas));
 for i=1:length(lambdas)
     lambda = lambdas(i);
-    a = lambda; b = lambda;
-    g_mean = (a*b)/(1-b); g_var = (a*b)/((1-b)^2);
-    Fs(1,i) = g_var/g_mean;
+    Fs(1,i) = (lambda+1)/lambda;
 end
 plot(lambdas,Fs);
-title('task 5. fano factor of negative binomial ');
+title('task 5. fano factor of negative binomial');
 xlabel('lambda = a = b');ylabel('F');
