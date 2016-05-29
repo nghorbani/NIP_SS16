@@ -7,7 +7,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 
 T = 1;
 Lmax = 100; %Hz
-Lt = @(t) Lmax .* t .* (1-t);
+Lamt = @(t) Lmax .* t .* (1-t);
 temporalDist = @(t) 3*t.^2 - 2*t.^3;
 
 mu = @(t) Lmax * ((.5*t^2 - (1/3)*t^3));
@@ -27,7 +27,7 @@ for sample = 1:numTrains % generating 100 spike trains
         % since temporal distribution is not invertible, using Lahirs's Method
         % William G. Cochran; Sampling Techniques, 3rd Edition
         x = rand;
-        if rand <= Lt(x);
+        if rand <= Lamt(x);
             spikeTrain(spikeIdx) = x;
         end
     end
@@ -100,7 +100,7 @@ for sample = 1:100
     spikeTrain(spikeTrain>1)=[];
     newTrain = zeros(size(spikeTrain));
     for Idx = 1:length(spikeTrain)
-        rejectProb = 1 - (Lt(spikeTrain(Idx))/Lmax);
+        rejectProb = 1 - (Lamt(spikeTrain(Idx))/Lmax);
         if ~(rejectProb>rand);newTrain(Idx)=spikeTrain(Idx);end
     end
     spikeTrain=newTrain(newTrain~=0);
