@@ -40,27 +40,27 @@ plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
 xlim([-20,20]);
 %% Metropolis-Hastings Sampler
 subplot(133);hold on;title('MCMC MH Sampler')
-q = @(x) (1/sqrt(2*pi))*exp(-0.5*x^2); % proposal distribution
-%q = @(x) normpdf(x,0,1)
-x_current = 0;
-sIdx = 1;
-while sIdx < nsamples
+proposalDist = @(x,m) (1/sqrt(2*pi))*exp(-0.5*(x-m)^2); % proposal distribution
+
+samples = zeros(1,nsamples);
+
+for sIdx = 2:nsamples
+    x_current = samples(sIdx-1);
     x_cand = normrnd(x_current,1); % normal centered around current x
-    alpha = q(x_cand)/q(x_current);% acceptnce ratio
+
+    alpha = proposalDist(x_current,x_cand) * CauchyPDF(x_cand)/( proposalDist(x_cand,x_current) * CauchyPDF(x_current)); % acceptance ratio
     if alpha >= 1
        samples(sIdx) = x_cand;
-       x_current = x_cand;
-       sIdx = sIdx + 1
     else
         u = rand;
         if u < alpha
            samples(sIdx) = x_cand;
-           x_current = x_cand;
-           sIdx = sIdx + 1          
+        else
+           samples(sIdx) = x_current;
         end
     end
 end
-[bincounts,bincenters] = hist(samples,10);
+[bincounts,bincenters] = hist(samples,20);
 bincounts = bincounts/sum(bincounts);
 bar(bincenters,bincounts,1,'r');
 plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
