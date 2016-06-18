@@ -23,7 +23,7 @@ while sIdx < nsamples
     end
 end
 [bincounts,bincenters] = hist(samples,50);
-bincounts = bincounts/sum(bincounts);
+bincounts = bincounts/diff(bincenters(1:2))/nsamples;
 bar(bincenters,bincounts,1,'r');
 plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
 xlim([-20,20]);
@@ -33,7 +33,7 @@ samples = rand(1,nsamples);
 samples = arrayfun(invCauchyCDF,samples);
 
 [bincounts,bincenters] = hist(samples,nsamples*2);
-bincounts = bincounts/sum(bincounts);
+bincounts = bincounts/diff(bincenters(1:2))/nsamples;
 bar(bincenters,bincounts,1,'b');
 
 plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
@@ -61,7 +61,7 @@ for sIdx = 2:nsamples
     end
 end
 [bincounts,bincenters] = hist(samples,20);
-bincounts = bincounts/sum(bincounts);
+bincounts = bincounts/diff(bincenters(1:2))/nsamples;
 bar(bincenters,bincounts,1,'r');
 plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
 xlim([-20,20]);
