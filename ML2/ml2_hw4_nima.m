@@ -16,15 +16,17 @@ subplot(131);hold on;title('Rejection Sampling');
 samples = zeros(1,nsamples);
 sIdx = 1;
 while sIdx < nsamples
-    x_current = -20 + 40*rand;
-    if (rand/pi) <= CauchyPDF(x_current)
-        samples(sIdx) = x_current;
+    xCurrent = -20 + 40*rand;
+    if (rand/pi) <= CauchyPDF(xCurrent)
+        samples(sIdx) = xCurrent;
         sIdx = sIdx + 1;
     end
 end
 [bincounts,bincenters] = hist(samples,50);
 bincounts = bincounts/diff(bincenters(1:2))/nsamples;
 bar(bincenters,bincounts,1,'r');
+%histogram(samples,'Normalization','probability')
+
 plot(-20:0.1:20,CauchyPDF(-20:0.1:20),'k--');% theoretical
 xlim([-20,20]);
 %% Inverse CDF sampling
@@ -42,22 +44,20 @@ xlim([-20,20]);
 subplot(133);hold on;title('MCMC MH Sampler')
 proposalDist = @(x,m) (1/sqrt(2*pi))*exp(-0.5*(x-m)^2); % proposal distribution
 
+numThin = 100; % thinning, to get independent samples
 samples = zeros(1,nsamples);
 
 for sIdx = 2:nsamples
-    x_current = samples(sIdx-1);
-    x_cand = normrnd(x_current,1); % normal centered around current x
-
-    alpha = proposalDist(x_current,x_cand) * CauchyPDF(x_cand)/( proposalDist(x_cand,x_current) * CauchyPDF(x_current)); % acceptance ratio
-    if alpha >= 1
-       samples(sIdx) = x_cand;
-    else
-        u = rand;
-        if u < alpha
-           samples(sIdx) = x_cand;
-        else
-           samples(sIdx) = x_current;
+    xCurrent = normrnd(0,1);%samples(sIdx-1);
+    for i = 1:numThin
+        xCand = normrnd(xCurrent,1); % normal centered around current x
+        alpha = proposalDist(xCurrent,xCand) * CauchyPDF(xCand)/( proposalDist(xCand,xCurrent) * CauchyPDF(xCurrent)); % acceptance ratio
+        if alpha >= 1
+           xCurrent = xCand;
+        elseif rand < alpha
+           xCurrent = xCand;
         end
+        samples(sIdx) = xCurrent;
     end
 end
 [bincounts,bincenters] = hist(samples,20);
