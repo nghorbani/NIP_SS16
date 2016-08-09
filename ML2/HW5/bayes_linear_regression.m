@@ -7,7 +7,7 @@ beta = 1;
 
 phi = zeros(N,M); % gramian matrix
 for i = 1:M
-    phi(:,i) = basis_fun(Xtrain,i);
+    phi(:,i) = basis_fun(Xtrain,Xtrain(i));
 end
 
 
@@ -16,7 +16,7 @@ u_posterior = beta*sigma_posterior*phi'*Ytrain;
 
 predicted_phi = zeros(length(Xtest),M); % gramian matrix
 for i=1:M
-    predictive_phi(:,i) = basis_fun(Xtest,i);
+    predictive_phi(:,i) = basis_fun(Xtest,Xtrain(i));
 end
 
 predictive_mean = u_posterior'*predictive_phi';

@@ -12,10 +12,10 @@ function DiffusionModelDemo(myDriftRate, myRandom_drift_std, myRandom_starting_s
 %% Setup constants and parameters
 
 % parameters
-NUMBER_OF_RUNS = 1000;
+NUMBER_OF_RUNS = 10000;
 TIME_SCALER = 0.001;
 LOWER_BOUND = 0;
-UPPER_BOUND = 1;
+UPPER_BOUND = 0.25;
 
 % argument defaults
 if nargin < 1, myDriftRate = 3; end

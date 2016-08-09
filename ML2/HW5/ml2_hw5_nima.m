@@ -1,8 +1,8 @@
 clear all;clc; close all;
 load('hw5_data.mat')
 clc; close all;
-M = 30; % using a 50 dimentional basis
 N = length(Xtrain);
+M = N; % using a 50 dimentional basis
 
 sigma_phis = [.1 1 10]; % width parameter
 
@@ -11,7 +11,7 @@ for alpha = [1, 10^-8]
     figure();i=0;
     for sigma_phi = sigma_phis
         i=i+1;subplot(2,2,i);
-        ML_yPrediction = ML_linear_regression(Xtrain,Ytrain,Xtest,M,@(x,j) basis_fun(x,j,sigma_phi));
+        ML_yPrediction = ML_linear_regression(Xtrain, Ytrain, Xtest, M, @(x,j) basis_fun(x,j,sigma_phi));
         [bayes_yPrediction, var_Prediction ]= bayes_linear_regression(Xtrain,Ytrain,Xtest,M,@(x,j) basis_fun(x,j,sigma_phi),alpha);
         plot(Xtest,Ytest,'g');hold on;
         plot(Xtest,ML_yPrediction,'r');

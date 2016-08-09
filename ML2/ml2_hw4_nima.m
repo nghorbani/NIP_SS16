@@ -17,7 +17,7 @@ samples = zeros(1,nsamples);
 sIdx = 1;
 while sIdx < nsamples
     xCurrent = -20 + 40*rand;
-    if (rand/pi) <= CauchyPDF(xCurrent)
+    if rand <= CauchyPDF(xCurrent)
         samples(sIdx) = xCurrent;
         sIdx = sIdx + 1;
     end

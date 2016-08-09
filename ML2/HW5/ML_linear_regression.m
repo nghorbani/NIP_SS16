@@ -4,7 +4,7 @@ N = length(Xtrain);
 
 phi = zeros(N,M); % gramian matrix
 for i = 1:M
-    phi(:,i) = basis_fun(Xtrain,i);
+    phi(:,i) = basis_fun(Xtrain,Xtrain(i));
 end
 
 wML = pinv(phi)*Ytrain;%  wML = (phi'*phi)^-1*phi'*Ytrain;
@@ -17,7 +17,7 @@ sigmaML = sqrt((1/N)* sigmaML);
 
 predicted_phi = zeros(length(Xtest),M); % gramian matrix
 for i = 1:M
-    predicted_phi(:,i) = basis_fun(Xtest,i);
+    predicted_phi(:,i) = basis_fun(Xtest,Xtrain(i));
 end
 
 yPrediction = wML' * predicted_phi';
