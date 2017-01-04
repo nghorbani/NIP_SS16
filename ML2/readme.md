@@ -1,6 +1,8 @@
 Regression using gassuain processes
 
-[Try in matlab!](GPR.mlx)
+[Try in python!](GRP.ipynb)
+
+[or in matlab!](GPR.mlx)
 
 we have noisy sensor readings (indicated by errorbars).
 first we will do a point prediction:
