@@ -7,7 +7,7 @@ sigmaf = 1; l = 1; sigman = 0; % parameters
 x = -5:0.1:5;
 K = get_kernel(x, x, sigmaf, l, sigman); 
 
-figure(100); 
+figure(101); 
 
 %% using matlab mvnrnd
 % figure; hold on;
