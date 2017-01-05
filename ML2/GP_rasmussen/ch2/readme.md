@@ -1,14 +1,14 @@
 # Gaussian Processes for Machine Learning
 Chapter 2
 
-Excercise 1
+### Excercise 1
 [matlab code](q01.m)
 
 ![alt tag](101.png)
 
 Excercise 2
 
-Excercise 3
+### Excercise 3
 
 <!--- \begin{bmatrix}X\\Y \end{bmatrix}  \sim N \big( \begin{bmatrix} \mu_x \\ \mu_y \end{bmatrix}, \begin{bmatrix}A & C^T \\C & B \end{bmatrix}  \big) \\
 X | y \sim N \big(\mu_x+C^TB^{-1}(y-\mu_y),A-C^TB^{-1}C\big)\\
