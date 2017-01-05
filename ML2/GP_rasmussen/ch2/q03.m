@@ -1,35 +1,33 @@
-% Goal: exccercise 1.ch2 Rasmussen
-% replication of figure 2.2
+% Goal: exccercise 3.ch2 Rasmussen
+% Brownian bridge process
+% For nearestPSD get it from https://goo.gl/pnj7Df
+% For shadedErrorBar get it from https://goo.gl/TyQtJH
+
 close all;clear;clc
 
 sigmaf = 1; l = 1; sigman = 0; % parameters
 
-x = -5:0.1:5;
+x = -1:0.01:1;
 K = get_kernel(x, x, sigmaf, l, sigman); 
 
-figure(101); 
+figure(103); 
 
-%% using matlab mvnrnd
-% figure; hold on;
-%for i=1:1000
-%z = mvnrnd(zeros(1,numel(x)),K);
-% plot(x,z,'r-');
-% end
-%% using the hint in the appendix A
-K = make_PD(K);%for numerical stability
+%K = make_PD(K);%for numerical stability
+K = nearestSPD(K);
+
 L = chol(K,'lower');
 for i=1:3
     z = L*randn([numel(x),1]);
     subplot(121);plot(x,z,'k--');hold on;
 end
 subplot(121);shadedErrorBar(x,zeros(size(x)),2*sqrt(diag(K)),':k',1);
-xlim([-5,5]);ylim([-2.5,2.5]);
+xlim([-1,1]);ylim([-2,2]);
 title('prior');xlabel('x');ylabel('y');
 %%
-x = [-4.0438   -2.2696   -1.2327   -0.2419    2.1774];
-y = [-1.4461    0.3732    0.6414    1.1079   -0.4665];
+x = [-0.8871   -0.3387   -0.0530    0.3065    0.8088];
+y = [-0.8309    0.3790    0.3061   -0.3499    0.6851];
 
-x_predict = -5:0.1:5;
+x_predict = -1:0.01:1;
 
 K = get_kernel(x, x, sigmaf, l, sigman);
 K_s = get_kernel(x_predict, x, sigmaf, l, 0);
@@ -38,7 +36,8 @@ K_ss = get_kernel(x_predict, x_predict, sigmaf, l, sigman);
 y_predict_mean = K_s*(K\y');
 y_predict_var = K_ss - K_s*(K\K_s');
 
-y_predict_var = make_PD(y_predict_var);%for numerical stability
+%y_predict_var = make_PD(y_predict_var);%for numerical stability
+y_predict_var = nearestSPD(y_predict_var);
 
 L = chol(y_predict_var,'lower');
 for i=1:3
@@ -51,12 +50,14 @@ subplot(122);shadedErrorBar(x_predict,y_predict_mean,2*sqrt(diag(y_predict_var))
 
 subplot(122);plot(x,y,'rO');
 title('posterior');
-xlim([-5,5]);ylim([-2.5,2.5]);
+xlim([-1,1]);ylim([-2,2]);
 xlabel('x');
-suptitle('Chapter 2. Excercise 1');
+suptitle(sprintf('Chapter 2. Excercise 3 \n Brownian bridge process'));
 
+%%
 function K = get_kernel(x1,x2,sigmaf,l,sigman)
-k = @(x1,x2,sigmaf,l,sigman) (sigmaf^2)*exp(-(1/(2*l^2))*(x1-x2)^2) + (sigman^2);
+% brownian bridge process
+k = @(x1,x2,sigmaf,l,sigman) min(x1,x2)-x1*x2;
 K = zeros(numel(x1),numel(x2));
 for i = 1:numel(x1)
     for j = 1:numel(x2)
