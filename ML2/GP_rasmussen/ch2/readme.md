@@ -6,8 +6,6 @@ Chapter 2
 
 ![alt tag](101.png)
 
-Excercise 2
-
 ### Excercise 3
 
 <!--- \begin{bmatrix}X\\Y \end{bmatrix}  \sim N \big( \begin{bmatrix} \mu_x \\ \mu_y \end{bmatrix}, \begin{bmatrix}A & C^T \\C & B \end{bmatrix}  \big) \\
