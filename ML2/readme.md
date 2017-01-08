@@ -3,7 +3,7 @@
 [**GPR in Python**](GRP.ipynb)
 [or in matlab](GPR.m)
 
-[**GPC in Python**](GRC.ipynb)
+[**GPC in Python**](GPC.ipynb)
 [or in matlab](GPC.m)
 
 ## Regression with Gaussian Processes
