@@ -22,8 +22,8 @@ And we finally use MAP estimate of the hyperparameters:
 
 ## Classification with Gaussian Processes
 We have generated training points and labels and then tried to compute labels for test points.
-The figures shows all the points with the superimposed GPC results in circle:
+Each + is one trainig point and * is a test point:
 
 ![alt tag](images/GPC.png)
 
-If the '+' and 'o' colors coincide then that point is correctly classified. The points without any circle around them are training points.
+If the color of '*' and 'o' coincide then that point is correctly classified. The points without any circle around them are training points ('+').
