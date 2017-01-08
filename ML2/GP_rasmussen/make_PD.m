@@ -1,6 +1,6 @@
 function [A,i] = make_PD(A)
 % gets a matrix and turns it into positive definit
-for i=1:1000
+for i=1:10
     try
         chol(A,'lower');
         fprintf('positive def at %d iters\n',i);
