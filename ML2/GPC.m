@@ -115,7 +115,7 @@ plot(x_test(y_test==1,1), x_test(y_test==1,2), 'b*', x_test(y_test==-1,1), x_tes
  
 plot(x_test(y_test_mean>=c1_thresh,1), x_test(y_test_mean>=c1_thresh,2), 'bO',...
     x_test(y_test_mean<c2_thresh,1), x_test(y_test_mean<c2_thresh,2), 'rO');
-axis([-4 4 -4 4]);title(sprintf('Gaussian Process Classification\nAccuracy = %2.2f%%',acc/100))
+axis([-3 3 -3 3]);title(sprintf('Gaussian Process Classification\nAccuracy = %2.2f%%',acc/100))
 
 %% computation of the covariance function
 function K = get_kernel(X1,X2,sigmaf,l,sigman)
