@@ -3,7 +3,7 @@
 [**GPR in Python**](GRP.ipynb)
 [or in matlab](GPR.m)
 
-[**GPC in Python**](GRC.ipynb)
+[**GPC in Python**](GPC.ipynb)
 [or in matlab](GPC.m)
 
 ## Regression with Gaussian Processes
@@ -26,4 +26,4 @@ The figures shows all the points with the superimposed GPC results in circle:
 
 ![alt tag](images/GPC.png)
 
-If the '+' and 'o' colors coincide then that point is correctly classified.
+If the '+' and 'o' colors coincide then that point is correctly classified. The points without any circle around them are training points.
