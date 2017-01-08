@@ -26,4 +26,4 @@ The figures shows all the points with the superimposed GPC results in circle:
 
 ![alt tag](images/GPC.png)
 
-If the '+' and 'o' colors coincide then that point is correctly classified.
+If the '+' and 'o' colors coincide then that point is correctly classified. The points without any circle around them are training points.
