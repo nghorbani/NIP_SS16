@@ -1,14 +1,29 @@
-# Regression using Gassuain Processes
+# Gaussian Process Regression and Classification
 
-[Try in **Python**](GRP.ipynb)
-[or in matlab](GPR.mlx)
+[**GPR in Python**](GRP.ipynb)
+[or in matlab](GPR.m)
 
-we have noisy sensor readings (indicated by errorbars).
+[**GPC in Python**](GRC.ipynb)
+[or in matlab](GPC.m)
+
+## Regression with Gaussian Processes
+We have noisy sensor readings (indicated by errorbars).
 first we will do a point prediction:
-![alt tag](GP-1point.png)
+
+![alt tag](\images\GRP_single.png)
 
 Next we will predict 100 points
-![alt tag](GP-multipoint.png)
+
+![alt tag](\images\GPR-multi.png)
 
 And we finally use MAP estimate of the hyperparameters:
-![alt tag](GP-multiMAP.png)
+
+![alt tag](GPR-optim.png)
+
+## Classification with Gaussian Processes
+We have generated training points and labels and then tried to compute labels for test points.
+The figures shows all the points with the superimposed GPC results in circle:
+
+![alt tag](\images\GRC.png)
+
+If the '+' and 'o' colors coincide then that point is correctly classified.
